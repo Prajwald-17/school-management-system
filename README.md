@@ -120,9 +120,12 @@ npm start
 
 ## Screenshots
 
-|---------------------|
-| ![HomePage](public/screenshots/HomePage1.png) |
-| Manage and view completed tasks |
+ ![HomePage](public/screenshots/HomePage1.png)
+ ![HomePage](public/screenshots/HomePage2.png)
+ ![HomePage](public/screenshots/AddSchoolPage.png)
+ ![HomePage](public/screenshots/AddSchoolInvalidPage.png)
+ ![HomePage](public/screenshots/ShowSchoolPage.png)
+ ![HomePage](public/screenshots/ShowSchoolPage.png)
 
 ```
 public/
