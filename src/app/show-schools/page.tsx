@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect ,useRef} from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 interface schools {
@@ -27,7 +27,6 @@ export default function ShowSchoolsPage() {
     try {
       const response = await fetch('/api/schools');
       const result = await response.json();
-      
       if (result.success) {
         setSchools(result.schools);
       } else {
@@ -80,7 +79,6 @@ export default function ShowSchoolsPage() {
           </p>
         </div>
       </div>
-
       {/* Schools Grid */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         {schools.length === 0 ? (
@@ -104,19 +102,18 @@ export default function ShowSchoolsPage() {
     </div>
   );
 }
-function SchoolCard({ school }: { school: schools}) {
+
+function SchoolCard({ school }: { school: schools }) {
   const [imageError, setImageError] = useState(false);
   const [showContactDropdown, setShowContactDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setShowContactDropdown(false);
       }
     }
-
     if (showContactDropdown) {
       document.addEventListener('mousedown', handleClickOutside);
       return () => {
@@ -128,41 +125,40 @@ function SchoolCard({ school }: { school: schools}) {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-visible hover:shadow-lg transition-shadow duration-300">
       {/* School Image */}
-      <div className="relative h-48 bg-gray-200">
-        {school.image && !imageError ? (
-          <Image
-            src={`/schoolImages/${school.image}`}
-            alt={school.name}
-            fill
-            className="object-cover"
-            onError={() => setImageError(true)}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-100">
-            <svg
-              className="w-16 h-16 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
-              />
-            </svg>
-          </div>
-        )}
-      </div>
+    <div className="relative h-48 bg-gray-200">
+      {school.image && !imageError ? (
+    <Image
+      src={school.image.startsWith('http') ? school.image : `/schoolImages/${school.image}`}
+      alt={school.name}
+      fill
+      className="object-cover"
+      onError={() => setImageError(true)}
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+     />
+  ) : (
+    <div className="w-full h-full flex items-center justify-center bg-gray-100">
+      <svg
+        className="w-16 h-16 text-gray-400"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+        />
+      </svg>
+    </div>
+  )}
+</div>
 
       {/* School Details */}
       <div className="p-4">
         <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
           {school.name}
         </h3>
-        
         <div className="space-y-2 text-sm text-gray-600">
           <div className="flex items-start space-x-2">
             <svg className="w-4 h-4 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -195,8 +191,7 @@ function SchoolCard({ school }: { school: schools}) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
           </button>
-
-          {/* Contact Dropdown - Fixed Version */}
+          {/* Contact Dropdown */}
           {showContactDropdown && (
             <div className="contact-dropdown animate-fadeIn">
               <div className="p-3 space-y-3">
@@ -215,7 +210,6 @@ function SchoolCard({ school }: { school: schools}) {
                     <p className="text-xs text-gray-500">{school.contact}</p>
                   </div>
                 </a>
-
                 {/* Email Contact */}
                 <a
                   href={`mailto:${school.email_id}`}

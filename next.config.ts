@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'res.cloudinary.com'],
     formats: ['image/webp', 'image/avif'],
   },
-  experimental: {
-    serverComponentsExternalPackages: ['mysql2']
-  }
+  serverExternalPackages: ['mysql2']
 };
 
 export default nextConfig;

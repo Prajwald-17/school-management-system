@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextResponse } from 'next/server';
-import { getConnection } from '@/lib/db';
+import { NextResponse  } from 'next/server';
+import { getConnection  } from '@/lib/db';
+import { ResultSetHeader } from 'mysql2';
+
 
 export async function GET() {
   try {
@@ -29,11 +31,10 @@ export async function POST(request: Request) {
     }
 
     const pool = await getConnection();
-    const [result] = await pool.query(
-      'INSERT INTO schools (name, address, city, state, contact, email_id, image) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      [name, address, city, state, contact, email_id, image]
-    );
-
+    const [result] = await pool.query<ResultSetHeader>(
+  'INSERT INTO schools (name, address, city, state, contact, email_id, image) VALUES (?, ?, ?, ?, ?, ?, ?)',
+  [name, address, city, state, contact, email_id, image]
+);
     return NextResponse.json({ success: true, message: 'School added', id: (result as any).insertId }, { status: 201 });
   } catch (error: any) {
     console.error(error);
