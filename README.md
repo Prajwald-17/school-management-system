@@ -139,8 +139,18 @@ npm start
 ## Project Structure
 
 ```text
+
+public/
+ schoolImages/          # SchoolImages Uploaded in add-schoolpage 
+ screenshots/           # Screenshots for README.rd
+file.svg
+globe.svg
+next.svg
+vercel.svg
+window.svg
+
 src/
-  app/
+ app/
     add-school/
       page.tsx           # Client page with React Hook Form and validation
     show-schools/
@@ -150,17 +160,21 @@ src/
         route.ts         # POST: uploads file to Cloudinary via upload_stream
       schools/
         route.ts         # GET: list schools; POST: insert new school
+    favicon.ico
     layout.tsx
     page.tsx             # Landing page with features & CTAs
     globals.css
-  components/
-    layout/              # (reserved for layout components)
-    ui/                  # (reserved for reusable UI components)
   lib/
     db.ts                # MySQL connection pool & helpers
     validation.ts        # Shared client-side validation rules
-public/
-  schoolImages/          # Sample images (local fallback)
+.gitignore
+eslint.config.mjs
+next.config.ts
+package-lock.json
+package.json
+posrcss.config.mjs
+tsconfig.json
+
 ```
 
 ---
