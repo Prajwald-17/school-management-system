@@ -10,7 +10,7 @@ export async function GET() {
     const [rows] = await pool.query('SELECT * FROM schools ORDER BY created_at DESC');
     return NextResponse.json({ success: true, schools: rows });
   } catch (error) {
-    console.error(error);
+    console.error('Schools API error:', error);
     return NextResponse.json({ success: false, error: 'Failed to fetch schools' }, { status: 500 });
   }
 }
