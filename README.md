@@ -120,32 +120,21 @@ npm start
 
 ## Screenshots
 
+ ### Home Page
+ 
  ![HomePage](public/screenshots/HomePage1.png)
  ![HomePage](public/screenshots/HomePage2.png)
- ![HomePage](public/screenshots/AddSchoolPage.png)
- ![HomePage](public/screenshots/AddSchoolInvalidPage.png)
- ![HomePage](public/screenshots/ShowSchoolPage.png)
- ![HomePage](public/screenshots/ShowSchoolPage.png)
 
-```
-public/
-  screenshots/
-    home.png
-    add-school.png
-    list-schools.png
-```
+ ### Add School Page
+ 
+ ![AddSchoolPage](public/screenshots/AddSchoolPage.png)
+ ![AddSchoolPage](public/screenshots/AddSchoolInvalidPage.png)
 
-Markdown references:
+ ### Show School Page
+ 
+ ![ShowSchoolPage](public/screenshots/ShowSchoolPage.png)
+ ![ShowSchoolPage](public/screenshots/ShowSchoolContact.png)
 
-```md
-![Home](public/screenshots/home.png)
-![Add School](public/screenshots/add-school.png)
-![List Schools](public/screenshots/list-schools.png)
-```
-
-Currently available sample images live in `public/schoolImages/` (used for cards). Consider adding screen captures to `public/screenshots/`.
-
----
 
 ## Project Structure
 
