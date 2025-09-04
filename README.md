@@ -120,17 +120,9 @@ npm start
 
 ## Screenshots
 
-| Home Page | 
-|-----------|
-| ![Home_Page](screenshots/HomePage1.png) |
-| Smart-sorted task list with search & filters | Comprehensive task creation form | Success confirmation feedback |
-
-### 🎯 Task Completion
-| Completed Tasks View |
 |---------------------|
-| ![Completed](screenshots/completed-tasks-screen.jpg) |
+| ![HomePage](screenshots/HomePage1.png) |
 | Manage and view completed tasks |
-You can add screenshots under `public/` and reference them below. Example:
 
 ```
 public/
