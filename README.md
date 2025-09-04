@@ -121,7 +121,7 @@ npm start
 ## Screenshots
 
 |---------------------|
-| ![HomePage](screenshots/HomePage1.png) |
+| ![HomePage](public/screenshots/HomePage1.png) |
 | Manage and view completed tasks |
 
 ```
