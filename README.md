@@ -228,7 +228,3 @@ tsconfig.json
 4. Open a PR with a clear description and screenshots when applicable.
 
 ---
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file (add one if missing) for details.
