@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import { getConnection } from './db';
 
 export interface User {
@@ -68,7 +69,7 @@ export async function createUser(email: string): Promise<User | null> {
       'INSERT INTO users (email, is_verified) VALUES (?, TRUE)',
       [email]
     );
-    const { insertId } = result as any;
+    const { insertId } = result as { insertId: number };
     return { id: insertId, email, is_verified: true };
   } catch (error) {
     console.error('Error creating user:', error);
@@ -120,7 +121,7 @@ export async function verifyStoredOTP(email: string, otp: string): Promise<boole
     );
     
     console.log('6. Database query executed');
-    console.log('7. Query result rows length:', (rows as any[]).length);
+    console.log('7. Query result rows length:', (rows as unknown[]).length);
     console.log('8. Query result:', rows);
     
     const otps = rows as OTP[];
@@ -157,13 +158,11 @@ export async function verifyStoredOTP(email: string, otp: string): Promise<boole
   }
 }
 
-// Create session (using the simple JWT from jwt.ts)
+// Create session
 export async function createSession(userId: number): Promise<string | null> {
   try {
     const pool = await getConnection();
     
-    // Import here to avoid Edge Runtime issues
-    const jwt = require('jsonwebtoken');
     const sessionToken = jwt.sign(
       { userId, timestamp: Date.now() },
       process.env.JWT_SECRET!,
@@ -184,11 +183,9 @@ export async function createSession(userId: number): Promise<string | null> {
   }
 }
 
-// Verify session (for API routes - Node.js runtime)
+// Verify session
 export async function verifySession(sessionToken: string): Promise<User | null> {
   try {
-    const jwt = require('jsonwebtoken');
-    
     // Verify JWT token
     const decoded = jwt.verify(sessionToken, process.env.JWT_SECRET!);
     if (!decoded) return null;
@@ -202,7 +199,7 @@ export async function verifySession(sessionToken: string): Promise<User | null> 
       [sessionToken]
     );
     
-    const results = rows as any[];
+    const results = rows as User[];
     return results.length > 0 ? results[0] : null;
   } catch (error) {
     console.error('Error verifying session:', error);

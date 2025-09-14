@@ -5,9 +5,6 @@ import { verifyJWTTokenEdge } from '@/lib/jwt';
 // Protected routes that require authentication
 const protectedRoutes = ['/add-school'];
 
-// Public routes that don't require authentication  
-const publicRoutes = ['/', '/show-schools', '/auth/login'];
-
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
@@ -31,9 +28,10 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
   
-  // Verify the session token
+  // Verify the session token (Edge Runtime compatible)
   const payload = verifyJWTTokenEdge(sessionToken);
   if (!payload) {
+    // Clear invalid session cookie
     const loginUrl = new URL('/auth/login', request.url);
     loginUrl.searchParams.set('redirect', pathname);
     const response = NextResponse.redirect(loginUrl);
@@ -47,7 +45,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match all request paths except static files and APIs
     '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };

@@ -1,6 +1,5 @@
 'use client';
 
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Inter } from 'next/font/google';
 import './globals.css';
@@ -13,8 +12,6 @@ const inter = Inter({ subsets: ['latin'] });
 function NavigationBar() {
   const { user, logout, loading } = useAuth();
   const router = useRouter();
-
-   console.log('NavigationBar render - User:', user, 'Loading:', loading);
 
   const handleLogout = async () => {
     await logout();
@@ -34,7 +31,9 @@ function NavigationBar() {
         </div>
         
         <div className="flex items-center space-x-4">
-          {!loading && (
+          {loading ? (
+            <span className="text-sm text-teal-200">Loading...</span>
+          ) : (
             user ? (
               <>
                 <span className="text-sm text-teal-200">Welcome, {user.email}</span>

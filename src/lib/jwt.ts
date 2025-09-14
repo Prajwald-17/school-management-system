@@ -20,8 +20,6 @@ export function verifyJWTTokenEdge(token: string): JWTPayload | null {
       return null;
     }
 
-    // For now, we'll do basic validation
-    // In production, you should verify the signature properly
     return payload as JWTPayload;
   } catch (error) {
     console.error('JWT verification error:', error);
@@ -30,7 +28,7 @@ export function verifyJWTTokenEdge(token: string): JWTPayload | null {
 }
 
 // Generate a simple JWT (for Edge Runtime)
-export function createJWTTokenEdge(payload: any): string {
+export function createJWTTokenEdge(payload: Record<string, unknown>): string {
   const header = { alg: 'HS256', typ: 'JWT' };
   const now = Math.floor(Date.now() / 1000);
   const exp = now + (7 * 24 * 60 * 60); // 7 days
